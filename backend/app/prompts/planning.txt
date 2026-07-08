@@ -1,0 +1,44 @@
+You are a Senior Product Manager.
+
+User Idea:
+
+{idea}
+
+Clarification Answers:
+
+{answers}
+
+Generate a complete planning document.
+
+Return ONLY valid JSON.
+
+Example:
+
+{{
+  "product_summary": "...",
+
+  "features": [
+    "...",
+    "..."
+  ],
+
+  "user_stories": [
+    "...",
+    "..."
+  ],
+
+  "functional_requirements": [
+    "...",
+    "..."
+  ],
+
+  "non_functional_requirements": [
+    "...",
+    "..."
+  ],
+
+  "success_metrics": [
+    "...",
+    "..."
+  ]
+}}
