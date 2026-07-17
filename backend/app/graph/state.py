@@ -2,29 +2,43 @@ from typing import TypedDict, List, Dict, Any
 
 
 class BlueprintState(TypedDict):
-    """
-    Shared state passed between all agents.
-    """
+
     current_step: str
     is_clarification_complete: bool
+
     # User Input
     idea: str
 
-    # Clarification Phase
+    # Clarification
     clarification_questions: List[str]
     clarification_answers: List[str]
 
-    # Planning Phase
-    planning_output: dict
+    # Modules
 
-    # Technical Phase
-    technical_output: dict
+    planning_output: Dict[str, Any]
 
-    # UI Phase
-    ui_output: dict
+    prd_output: Dict[str, Any]
 
-    # Planning
-    roadmap: str
+    technical_output: Dict[str, Any]
 
-    # Final Output
+    api_output: Dict[str, Any]
+
+    database_output: Dict[str, Any]
+
+    ui_output: Dict[str, Any]
+
+    roadmap_output: Dict[str,Any]
+
+    risk_output: Dict[str,Any]
+
+    security_output: Dict[str,Any]
+
+    qa_output: Dict[str,Any]
+
+    deployment_output: Dict[str,Any]
+
+    documentation_output: Dict[str,Any]
+
+    # Final
+
     final_blueprint: Dict[str, Any]

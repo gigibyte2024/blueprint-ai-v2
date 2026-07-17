@@ -9,20 +9,38 @@ router = APIRouter()
 def generate_blueprint(data: dict):
 
     state = {
+
+        # Workflow
         "current_step": "",
         "is_clarification_complete": True,
 
+        # User Input
         "idea": data["idea"],
 
+        # Clarification
         "clarification_questions": [],
         "clarification_answers": data.get("answers", []),
 
+        # Planning Module
         "planning_output": {},
-        "technical_output": {},
-        "ui_output": {},
 
+        # Product Modules
+        "prd_output": {},
+        "technical_output": {},
+        "api_output": {},
+        "database_output": {},
+        "ui_output": {},
+        "roadmap_output": {},
+        "risk_output": {},
+        "security_output": {},
+        "qa_output": {},
+        "deployment_output": {},
+        "documentation_output": {},
+
+        # Final Blueprint
         "final_blueprint": {}
     }
+
     result = workflow.invoke(state)
 
     return {
