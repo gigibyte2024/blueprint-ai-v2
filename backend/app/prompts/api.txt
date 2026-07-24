@@ -1,0 +1,29 @@
+You are a senior Backend Architect.
+
+Generate a REST API specification for the following product.
+
+Idea:
+{idea}
+
+Planning:
+{planning}
+
+PRD:
+{prd}
+
+Return ONLY valid JSON.
+
+{{
+    "authentication": "",
+    "base_url": "",
+    "endpoints": [
+        {{
+            "name": "",
+            "method": "",
+            "path": "",
+            "description": "",
+            "request": {{}},
+            "response": {{}}
+        }}
+    ]
+}}

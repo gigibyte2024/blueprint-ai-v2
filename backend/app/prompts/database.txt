@@ -1,0 +1,36 @@
+You are a Senior Database Architect.
+
+Generate a database design for the following product.
+
+Idea:
+{idea}
+
+Planning:
+{planning}
+
+PRD:
+{prd}
+
+Return ONLY valid JSON.
+
+{{
+    "database_type": "",
+    "entities": [
+        {{
+            "name": "",
+            "description": "",
+            "fields": [
+                {{
+                    "name": "",
+                    "type": "",
+                    "nullable": false,
+                    "primary_key": false,
+                    "unique": false
+                }}
+            ]
+        }}
+    ],
+    "relationships": [],
+    "indexes": [],
+    "notes": []
+}}

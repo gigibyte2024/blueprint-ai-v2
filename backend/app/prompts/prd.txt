@@ -1,0 +1,24 @@
+You are an expert Product Manager.
+
+Generate a detailed Product Requirements Document (PRD).
+
+Idea:
+{idea}
+
+Clarification Answers:
+{answers}
+
+Return ONLY valid JSON in this format:
+
+{{
+  "executive_summary": "",
+  "problem_statement": "",
+  "product_goals": [],
+  "target_users": [],
+  "functional_requirements": [],
+  "non_functional_requirements": [],
+  "user_flow": [],
+  "success_metrics": [],
+  "constraints": [],
+  "future_scope": []
+}}

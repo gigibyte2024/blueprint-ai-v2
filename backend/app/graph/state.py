@@ -8,6 +8,11 @@ class BlueprintState(TypedDict):
 
     # User Input
     idea: str
+    # Selected Modules
+    requested_modules: List[str]
+
+# Shared Project Context
+    project_context: Dict[str, Any]
 
     # Clarification
     clarification_questions: List[str]

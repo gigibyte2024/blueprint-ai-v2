@@ -1,0 +1,32 @@
+You are an experienced Technical Project Manager.
+
+Generate a development roadmap for the following product.
+
+Idea:
+{idea}
+
+Planning:
+{planning}
+
+PRD:
+{prd}
+
+Technical:
+{technical}
+
+Return ONLY valid JSON.
+
+{{
+    "estimated_duration": "",
+    "phases": [
+        {{
+            "phase": "",
+            "duration": "",
+            "goals": [],
+            "deliverables": []
+        }}
+    ],
+    "milestones": [],
+    "risks": [],
+    "recommendations": []
+}}

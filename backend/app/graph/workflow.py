@@ -7,7 +7,10 @@ from app.agents.planning_agent import PlanningAgent
 from app.agents.technical_agent import TechnicalAgent
 from app.agents.ui_agent import UIAgent
 from app.agents.composer_agent import ComposerAgent
-
+from app.agents.prd_agent import PRDAgent
+from app.agents.api_agent import APIAgent
+from app.agents.database_agent import DatabaseAgent
+from app.agents.roadmap_agent import RoadmapAgent
 
 builder = StateGraph(BlueprintState)
 planning = PlanningAgent()
@@ -21,7 +24,10 @@ builder.set_entry_point("orchestrator")
 technical = TechnicalAgent()
 ui = UIAgent()
 composer = ComposerAgent()
-
+prd = PRDAgent()
+api = APIAgent()
+database = DatabaseAgent()
+roadmap = RoadmapAgent()
 
 def route(state: BlueprintState):
 
@@ -37,6 +43,7 @@ builder.add_conditional_edges(
     },
 )
 
+
 builder.add_edge(
     "clarification",
     END,
@@ -47,18 +54,31 @@ builder.add_node(
     planning.execute,
 )
 
-
-builder.add_edge(
-    "planning",
-    "technical"
+builder.add_node(
+    "prd",
+    prd.execute,
+)
+builder.add_node(
+    "api",
+    api.execute,
+)
+builder.add_node(
+    "database",
+    database.execute,
 )
 
-
-builder.add_edge(
-    "technical",
-    "ui",
+builder.add_node(
+    "roadmap",
+    roadmap.execute,
 )
 
+builder.add_edge("planning", "prd")
+builder.add_edge("prd", "technical")
+
+builder.add_edge("technical", "api")
+builder.add_edge("api", "database")
+builder.add_edge("database", "roadmap")
+builder.add_edge("roadmap", "ui")
 builder.add_edge(
     "ui",
     "composer",
