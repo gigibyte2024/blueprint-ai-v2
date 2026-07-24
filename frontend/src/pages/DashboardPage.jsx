@@ -4,11 +4,12 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Card from "../components/Card";
 import Button from "../components/Button";
-
+import BlueprintRenderer from "../components/BlueprintRenderer";
 export default function DashboardPage() {
   const navigate = useNavigate();
 
   const [blueprint, setBlueprint] = useState(null);
+  const [activeTab, setActiveTab] = useState("planning");
 
   useEffect(() => {
     const data = sessionStorage.getItem("blueprint");
@@ -23,130 +24,111 @@ export default function DashboardPage() {
 
   if (!blueprint) {
     return (
-      <div className="min-h-screen bg-slate-950 text-white flex items-center justify-center">
-        <h2 className="text-2xl font-semibold">Loading Blueprint...</h2>
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center text-white">
+        <h2 className="text-2xl font-semibold">
+          Loading Blueprint...
+        </h2>
       </div>
     );
   }
+
+  const tabs = [
+    { key: "planning", label: "📋 Planning" },
+    { key: "prd", label: "📄 PRD" },
+    { key: "technical", label: "🏗 Technical" },
+    { key: "api", label: "🔌 API" },
+    { key: "database", label: "🗄 Database" },
+    { key: "roadmap", label: "🗺 Roadmap" },
+    { key: "ui", label: "🎨 UI" },
+  ];
 
   return (
     <div className="min-h-screen bg-slate-950 text-white">
       <Navbar />
 
-      <div className="max-w-6xl mx-auto px-8 py-12">
+      <div className="max-w-[1600px] mx-auto px-6 py-12">
+
+        {/* Header */}
 
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold">
             🚀 Your Product Blueprint
           </h1>
 
-          <p className="text-slate-400 mt-4">
+          <p className="text-slate-400 mt-4 text-lg">
             Generated using Blueprint AI
           </p>
         </div>
 
-        {/* Planning */}
+        {/* Main Layout */}
 
-        <Card>
+        <div className="grid lg:grid-cols-4 gap-8">
 
-          <h2 className="text-3xl font-bold mb-6">
-            📋 Planning
-          </h2>
+          {/* Sidebar */}
 
-          <h3 className="text-xl font-semibold mb-2">
-            Product Summary
-          </h3>
+          <Card>
 
-          <p className="text-slate-300 mb-6">
-            {blueprint.planning.product_summary}
-          </p>
+            <h2 className="text-xl font-bold mb-6">
+              Blueprint Sections
+            </h2>
 
-          <h3 className="text-xl font-semibold mb-2">
-            Features
-          </h3>
+            <div className="space-y-3">
 
-          <ul className="list-disc pl-6 space-y-2 mb-6">
-            {blueprint.planning.features.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
+              {tabs.map((tab) => (
 
-          <h3 className="text-xl font-semibold mb-2">
-            User Stories
-          </h3>
+                <button
+                  key={tab.key}
+                  onClick={() => setActiveTab(tab.key)}
+                  className={`w-full rounded-xl px-4 py-3 text-left transition-all duration-300 ${
+                    activeTab === tab.key
+                      ? "bg-violet-600 text-white"
+                      : "bg-slate-900 text-slate-300 hover:bg-slate-800"
+                  }`}
+                >
+                  {tab.label}
+                </button>
 
-          <ul className="list-disc pl-6 space-y-2">
-            {blueprint.planning.user_stories.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
+              ))}
 
-        </Card>
+            </div>
 
-        <div className="h-8" />
+          </Card>
 
-        {/* Technical */}
+          {/* Content */}
 
-        <Card>
+          <div className="lg:col-span-3">
 
-          <h2 className="text-3xl font-bold mb-6">
-            ⚙️ Technical
-          </h2>
+            <Card>
 
-          <h3 className="text-xl font-semibold mb-2">
-            Tech Stack
-          </h3>
+              <div className="flex justify-between items-center mb-6">
 
-          <pre className="bg-slate-900 p-4 rounded-xl overflow-auto mb-6">
-            {JSON.stringify(blueprint.technical.tech_stack, null, 2)}
-          </pre>
+                <h2 className="text-3xl font-bold capitalize">
+                  {activeTab}
+                </h2>
 
-          <h3 className="text-xl font-semibold mb-2">
-            API Endpoints
-          </h3>
+              </div>
 
-          <ul className="list-disc pl-6 space-y-2">
-            {blueprint.technical.api_endpoints.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
+              <div className="bg-slate-900 rounded-xl p-6 overflow-auto max-h-[650px]">
 
-        </Card>
+              <BlueprintRenderer
+  tab={activeTab}
+  data={blueprint[activeTab]}
+/>
 
-        <div className="h-8" />
+              </div>
 
-        {/* UI */}
+            </Card>
 
-        <Card>
+          </div>
 
-          <h2 className="text-3xl font-bold mb-6">
-            🎨 UI Design
-          </h2>
+        </div>
 
-          <h3 className="text-xl font-semibold mb-2">
-            Screens
-          </h3>
-
-          <ul className="list-disc pl-6 space-y-2 mb-6">
-            {blueprint.ui.screens.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
-
-          <h3 className="text-xl font-semibold mb-2">
-            Design Prompt
-          </h3>
-
-          <p className="text-slate-300">
-            {blueprint.ui.ui_prompt}
-          </p>
-
-        </Card>
+        {/* Bottom Button */}
 
         <div className="mt-12 text-center">
 
           <Button onClick={() => navigate("/workspace")}>
-            Generate Another Blueprint
+            ✨ Generate Another Blueprint
           </Button>
 
         </div>
