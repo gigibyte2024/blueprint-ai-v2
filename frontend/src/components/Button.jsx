@@ -1,13 +1,9 @@
-export default function Button({
-    children,
-    onClick,
-    disabled = false,
-  }) {
-    return (
-      <button
-        onClick={onClick}
-        disabled={disabled}
-        className="
+export default function Button({ children, onClick, disabled = false }) {
+  return (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      className="
         bg-violet-600
         hover:bg-violet-500
         active:scale-95
@@ -22,8 +18,8 @@ export default function Button({
         text-lg
         shadow-lg
         shadow-violet-900/40"
-      >
-        {children}
-      </button>
-    );
-  }
+    >
+      {children}
+    </button>
+  );
+}

@@ -1,8 +1,8 @@
 export default function TextArea(props) {
-    return (
-      <textarea
-        {...props}
-        className="
+  return (
+    <textarea
+      {...props}
+      className="
         w-full
         rounded-2xl
         bg-slate-900
@@ -17,6 +17,6 @@ export default function TextArea(props) {
         focus:border-violet-500
         transition-all
         duration-300"
-      />
-    );
-  }
+    />
+  );
+}

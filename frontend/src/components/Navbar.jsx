@@ -9,13 +9,9 @@ export default function Navbar() {
         </div>
 
         <div>
-          <h1 className="text-white text-xl font-bold">
-            Blueprint AI
-          </h1>
+          <h1 className="text-white text-xl font-bold">Blueprint AI</h1>
 
-          <p className="text-slate-400 text-sm">
-            AI Product Architect
-          </p>
+          <p className="text-slate-400 text-sm">AI Product Architect</p>
         </div>
       </div>
 
