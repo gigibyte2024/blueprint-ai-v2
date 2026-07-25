@@ -50,7 +50,6 @@ def generate_blueprint(data: dict):
         "final_blueprint": {}
 }
     result = workflow.invoke(state)
-
     return {
         "success": True,
         "blueprint": result["final_blueprint"]

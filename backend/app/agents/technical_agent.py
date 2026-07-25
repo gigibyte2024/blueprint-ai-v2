@@ -19,7 +19,17 @@ class TechnicalAgent(BaseAgent):
         if response.endswith("```"):
             response = response[:-3]
 
-        return json.loads(response)
+        print("\n========== TECHNICAL AGENT OUTPUT ==========\n")
+        print(response)
+        print("\n===========================================\n")
+
+        try:
+            return json.loads(response)
+        except json.JSONDecodeError:
+            print("\n===== INVALID JSON FROM LLM =====\n")
+            print(response)
+            print("\n=================================\n")
+            raise
 
     def execute(self, state: BlueprintState):
 
