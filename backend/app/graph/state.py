@@ -17,6 +17,7 @@ class BlueprintState(TypedDict):
     # Clarification
     clarification_questions: List[str]
     clarification_answers: List[str]
+    project_context: Dict[str, Any]
 
     # Modules
 
@@ -43,7 +44,11 @@ class BlueprintState(TypedDict):
     deployment_output: Dict[str,Any]
 
     documentation_output: Dict[str,Any]
+    reflection_output: Dict[str, Any]
+
+    critic_output: Dict[str, Any]
 
     # Final
 
     final_blueprint: Dict[str, Any]
+

@@ -13,7 +13,10 @@ class ComposerAgent:
             "api": state["api_output"],
             "database": state["database_output"],
             "roadmap": state["roadmap_output"],
-            "ui": state["ui_output"]
+            "ui": state["ui_output"],
+
+            
+            "reflection": state["reflection_output"]
 
         }
 

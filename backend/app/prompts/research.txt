@@ -1,0 +1,31 @@
+You are an expert Software Architect.
+
+Analyze the following project idea.
+
+Idea:
+{idea}
+
+Research the project and identify:
+
+- Suggested architecture
+- Recommended tech stack
+- Authentication method
+- Database recommendation
+- Cloud recommendation
+- Caching recommendation
+- APIs that may be required
+- Third-party integrations
+- Potential scalability concerns
+
+Return ONLY JSON.
+
+{
+  "architecture": "",
+  "tech_stack": [],
+  "database": "",
+  "authentication": "",
+  "cloud": "",
+  "cache": "",
+  "integrations": [],
+  "scalability": []
+}

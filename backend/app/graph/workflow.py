@@ -11,6 +11,8 @@ from app.agents.prd_agent import PRDAgent
 from app.agents.api_agent import APIAgent
 from app.agents.database_agent import DatabaseAgent
 from app.agents.roadmap_agent import RoadmapAgent
+from app.agents.reflection_agent import ReflectionAgent
+from app.agents.research_agent import ResearchAgent
 
 builder = StateGraph(BlueprintState)
 planning = PlanningAgent()
@@ -28,6 +30,8 @@ prd = PRDAgent()
 api = APIAgent()
 database = DatabaseAgent()
 roadmap = RoadmapAgent()
+reflection = ReflectionAgent()
+research = ResearchAgent()
 
 def route(state: BlueprintState):
 
@@ -39,7 +43,7 @@ builder.add_conditional_edges(
     route,
     {
         "clarification": "clarification",
-        "planning": "planning"
+        "planning": "research",
     },
 )
 
@@ -72,6 +76,7 @@ builder.add_node(
     roadmap.execute,
 )
 
+builder.add_edge("research", "planning")
 builder.add_edge("planning", "prd")
 builder.add_edge("prd", "technical")
 
@@ -81,6 +86,11 @@ builder.add_edge("database", "roadmap")
 builder.add_edge("roadmap", "ui")
 builder.add_edge(
     "ui",
+    "reflection",
+)
+
+builder.add_edge(
+    "reflection",
     "composer",
 )
 
@@ -102,7 +112,15 @@ builder.add_node(
     "composer",
     composer.execute,
 )
+builder.add_node(
+    "reflection",
+    reflection.execute,
+)
 
+builder.add_node(
+    "research",
+    research.execute,
+)
 
 
 workflow = builder.compile()

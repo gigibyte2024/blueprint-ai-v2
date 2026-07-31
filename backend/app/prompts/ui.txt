@@ -13,14 +13,25 @@ Product Summary:
 Features:
 {features}
 
-Generate a complete UI plan.
+Research Context:
+{research}
+
+Generate a complete UI/UX plan using the product summary, features, and research context.
+
+Focus on:
+- Excellent user experience
+- Modern SaaS design
+- Accessibility
+- Responsive layouts
+- Consistent design system
+- Smooth user flows
 
 Return ONLY valid JSON.
 
 Example:
 
-{{
-    "screens":[
+{
+    "screens": [
         "Landing Page",
         "Login",
         "Dashboard",
@@ -29,17 +40,17 @@ Example:
         "Profile"
     ],
 
-    "user_flow":[
+    "user_flow": [
         "Landing → Login → Dashboard → Idea Workspace → Blueprint Results"
     ],
 
-    "ui_prompt":"A modern AI SaaS interface with glassmorphism, purple gradient accents, rounded cards, minimal design, sidebar navigation, beautiful animations, responsive layout and clean typography.",
+    "ui_prompt": "A modern AI SaaS interface with glassmorphism, purple gradient accents, rounded cards, minimal design, sidebar navigation, beautiful animations, responsive layout and clean typography.",
 
-    "design_system":[
+    "design_system": [
         "Modern",
         "Minimal",
         "Glassmorphism",
         "Purple Gradient",
         "Dark Theme"
     ]
-}}
+}

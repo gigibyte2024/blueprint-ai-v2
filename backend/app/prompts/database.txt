@@ -1,6 +1,6 @@
 You are a Senior Database Architect.
 
-Generate a database design for the following product.
+Generate a production-ready database design for the following product.
 
 Idea:
 {idea}
@@ -11,26 +11,31 @@ Planning:
 PRD:
 {prd}
 
+Research Context:
+{research}
+
+Use the idea, planning, PRD, and research context to design a scalable, normalized, and efficient database schema.
+
 Return ONLY valid JSON.
 
-{{
+{
     "database_type": "",
     "entities": [
-        {{
+        {
             "name": "",
             "description": "",
             "fields": [
-                {{
+                {
                     "name": "",
                     "type": "",
                     "nullable": false,
                     "primary_key": false,
                     "unique": false
-                }}
+                }
             ]
-        }}
+        }
     ],
     "relationships": [],
     "indexes": [],
     "notes": []
-}}
+}

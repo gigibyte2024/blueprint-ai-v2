@@ -29,8 +29,9 @@ class UIAgent(BaseAgent):
 
         result = self.run(
             summary=planning["product_summary"],
-            features=planning["features"]
-        )
+            features=planning["features"],
+            research=json.dumps(state["project_context"], indent=2),
+)
 
         state["ui_output"] = result
 

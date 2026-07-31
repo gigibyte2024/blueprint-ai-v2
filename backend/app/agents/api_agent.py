@@ -30,7 +30,9 @@ class APIAgent(BaseAgent):
             idea=state["idea"],
             planning=json.dumps(state["planning_output"], indent=2),
             prd=json.dumps(state["prd_output"], indent=2),
-        )
+            research=json.dumps(state["project_context"], indent=2),
+)
+
 
         state["api_output"] = result
 

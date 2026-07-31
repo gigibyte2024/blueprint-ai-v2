@@ -6,7 +6,10 @@ Product Summary:
 Features:
 {features}
 
-Generate a detailed backend architecture.
+Research Context:
+{research}
+
+Generate a detailed backend architecture using the product summary, features, and research context.
 
 Return ONLY valid JSON.
 
@@ -23,25 +26,25 @@ Rules:
 
 Return this exact structure:
 
-{{
-    "tech_stack": {{
+{
+    "tech_stack": {
         "frontend": "...",
         "backend": "...",
         "database": "...",
         "authentication": "...",
         "deployment": "..."
-    }},
+    },
 
-    "database_tables": {{
+    "database_tables": {
         "users": [
             "id",
             "email"
         ]
-    }},
+    },
 
     "api_endpoints": [
         "POST /generate"
     ],
 
     "folder_structure": "src/\n├── controllers/\n│   ├── userController.js\n│   ├── workoutController.js\n├── models/\n├── routes/\n├── services/\n└── app.js"
-}}
+}

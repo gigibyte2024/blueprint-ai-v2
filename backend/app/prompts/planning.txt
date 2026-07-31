@@ -8,13 +8,17 @@ Clarification Answers:
 
 {answers}
 
-Generate a complete planning document.
+Research Context:
+
+{research}
+
+Generate a complete planning document using the user idea, clarification answers, and research context.
 
 Return ONLY valid JSON.
 
 Example:
 
-{{
+{
   "product_summary": "...",
 
   "features": [
@@ -41,4 +45,4 @@ Example:
     "...",
     "..."
   ]
-}}
+}

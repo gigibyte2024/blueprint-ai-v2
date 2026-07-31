@@ -37,9 +37,9 @@ class TechnicalAgent(BaseAgent):
 
         result = self.run(
             summary=planning["product_summary"],
-            features=planning["features"]
-        )
-
+            features=planning["features"],
+            research=state["project_context"]
+)
         state["technical_output"] = result
 
         return state

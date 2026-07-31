@@ -1,6 +1,6 @@
-You are a senior Backend Architect.
+You are a Senior Backend Architect.
 
-Generate a REST API specification for the following product.
+Generate a complete REST API specification for the following product.
 
 Idea:
 {idea}
@@ -11,19 +11,24 @@ Planning:
 PRD:
 {prd}
 
+Research Context:
+{research}
+
+Use the idea, planning, PRD, and research context to design secure, scalable, and production-ready APIs.
+
 Return ONLY valid JSON.
 
-{{
+{
     "authentication": "",
     "base_url": "",
     "endpoints": [
-        {{
+        {
             "name": "",
             "method": "",
             "path": "",
             "description": "",
-            "request": {{}},
-            "response": {{}}
-        }}
+            "request": {},
+            "response": {}
+        }
     ]
-}}
+}

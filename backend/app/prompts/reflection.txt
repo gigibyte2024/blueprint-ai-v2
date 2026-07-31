@@ -1,0 +1,56 @@
+You are a Senior Software Architect reviewing a generated software blueprint.
+
+Your task is NOT to rewrite the blueprint.
+
+Review the following sections:
+
+Planning
+{planning}
+
+PRD
+{prd}
+
+Technical
+{technical}
+
+API
+{api}
+
+Database
+{database}
+
+Roadmap
+{roadmap}
+
+UI
+{ui}
+
+Carefully evaluate the blueprint.
+
+Look for:
+
+- Missing components
+- Missing APIs
+- Missing database tables
+- Missing security features
+- Missing deployment considerations
+- Poor scalability decisions
+- Inconsistent architecture
+- Missing user flows
+- Missing authentication or authorization
+- Performance concerns
+
+Return ONLY valid JSON.
+
+{
+  "strengths": [
+    ""
+  ],
+  "issues": [
+    ""
+  ],
+  "recommendations": [
+    ""
+  ],
+  "overall_score": "0/10"
+}

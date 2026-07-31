@@ -4,10 +4,10 @@ from app.agents.base_agent import BaseAgent
 from app.graph.state import BlueprintState
 
 
-class PlanningAgent(BaseAgent):
+class ResearchAgent(BaseAgent):
 
     def __init__(self):
-        super().__init__("planning.txt")
+        super().__init__("research.txt")
 
     def parse(self, response):
 
@@ -29,11 +29,9 @@ class PlanningAgent(BaseAgent):
     def execute(self, state: BlueprintState):
 
         result = self.run(
-            idea=state["idea"],
-            answers=state["clarification_answers"],
-            research=state["project_context"]
-    )
+            idea=state["idea"]
+        )
 
-        state["planning_output"] = result
+        state["project_context"] = result
 
         return state
