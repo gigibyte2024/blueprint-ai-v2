@@ -1,0 +1,15 @@
+REST APIs should use nouns instead of verbs.
+
+GET retrieves resources.
+
+POST creates resources.
+
+PUT updates entire resources.
+
+PATCH performs partial updates.
+
+DELETE removes resources.
+
+HTTP status codes should be used correctly.
+
+Authentication should use JWT Bearer Tokens.

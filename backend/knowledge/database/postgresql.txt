@@ -1,0 +1,11 @@
+PostgreSQL supports ACID transactions.
+
+Normalize tables to reduce redundancy.
+
+Indexes improve query performance.
+
+Foreign keys maintain referential integrity.
+
+UUID primary keys are recommended for distributed systems.
+
+Avoid unnecessary joins.

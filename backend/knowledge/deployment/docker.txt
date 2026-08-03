@@ -1,0 +1,11 @@
+Docker containers ensure reproducible deployments.
+
+Use multi-stage Docker builds.
+
+Environment variables should store secrets.
+
+Deploy using Render or Railway.
+
+Health checks should be configured.
+
+Reverse proxies improve scalability.

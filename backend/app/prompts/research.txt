@@ -1,11 +1,16 @@
 You are an expert Software Architect.
 
-Analyze the following project idea.
+Analyze the following project.
 
-Idea:
+Project Idea:
 {idea}
 
-Research the project and identify:
+Retrieved Knowledge Base Context:
+{context}
+
+Use the retrieved context as your primary reference while making recommendations.
+
+Based on the project idea and retrieved knowledge, identify:
 
 - Suggested architecture
 - Recommended tech stack
@@ -17,9 +22,9 @@ Research the project and identify:
 - Third-party integrations
 - Potential scalability concerns
 
-Return ONLY JSON.
+Return ONLY valid JSON.
 
-{
+{{
   "architecture": "",
   "tech_stack": [],
   "database": "",
@@ -28,4 +33,4 @@ Return ONLY JSON.
   "cache": "",
   "integrations": [],
   "scalability": []
-}
+}}

@@ -21,17 +21,17 @@ Use the idea, planning, PRD, technical architecture, and research context to cre
 
 Return ONLY valid JSON.
 
-{
+{{
     "estimated_duration": "",
     "phases": [
-        {
+        {{
             "phase": "",
             "duration": "",
             "goals": [],
             "deliverables": []
-        }
+        }}
     ],
     "milestones": [],
     "risks": [],
     "recommendations": []
-}
+}}

@@ -18,24 +18,24 @@ Use the idea, planning, PRD, and research context to design a scalable, normaliz
 
 Return ONLY valid JSON.
 
-{
+{{
     "database_type": "",
     "entities": [
-        {
+        {{
             "name": "",
             "description": "",
             "fields": [
-                {
+                {{
                     "name": "",
                     "type": "",
                     "nullable": false,
                     "primary_key": false,
                     "unique": false
-                }
+                }}
             ]
-        }
+        }}
     ],
     "relationships": [],
     "indexes": [],
     "notes": []
-}
+}}

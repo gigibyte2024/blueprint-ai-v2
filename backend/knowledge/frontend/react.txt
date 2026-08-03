@@ -1,0 +1,13 @@
+React applications should use reusable components.
+
+Tailwind CSS improves development speed.
+
+shadcn/ui provides accessible components.
+
+Framer Motion enables smooth animations.
+
+Responsive design is essential.
+
+Dark mode improves usability.
+
+Lazy loading improves performance.

@@ -1,0 +1,13 @@
+Microservices should be loosely coupled.
+
+Each service should own its own database.
+
+Use REST APIs or asynchronous messaging.
+
+Stateless services improve scalability.
+
+API Gateway can be used for routing.
+
+Containerization with Docker is recommended.
+
+Horizontal scaling should be supported.

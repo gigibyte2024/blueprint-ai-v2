@@ -1,0 +1,13 @@
+Passwords should never be stored in plain text.
+
+Use bcrypt hashing.
+
+JWT tokens should expire.
+
+Refresh tokens improve security.
+
+HTTPS must always be enabled.
+
+Validate every incoming request.
+
+Apply rate limiting to public APIs.

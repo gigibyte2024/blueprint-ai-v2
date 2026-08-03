@@ -7,7 +7,8 @@ app = FastAPI(title="Blueprint AI")
 
 origins = [
     "http://localhost:5173",
-    "https://blueprint-ai-v2-phi.vercel.app",  # replace if your Vercel URL is different
+    "http://127.0.0.1:5173",
+    "https://blueprint-ai-v2-phi.vercel.app",
 ]
 
 app.add_middleware(

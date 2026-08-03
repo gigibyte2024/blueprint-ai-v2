@@ -42,15 +42,10 @@ Look for:
 
 Return ONLY valid JSON.
 
-{
-  "strengths": [
-    ""
-  ],
-  "issues": [
-    ""
-  ],
-  "recommendations": [
-    ""
-  ],
-  "overall_score": "0/10"
-}
+{{
+  "strengths": [],
+  "weaknesses": [],
+  "missing_features": [],
+  "recommendations": [],
+  "overall_score": 0
+}}

@@ -18,17 +18,17 @@ Use the idea, planning, PRD, and research context to design secure, scalable, an
 
 Return ONLY valid JSON.
 
-{
+{{
     "authentication": "",
     "base_url": "",
     "endpoints": [
-        {
+        {{
             "name": "",
             "method": "",
             "path": "",
             "description": "",
-            "request": {},
-            "response": {}
-        }
+            "request": {{}},
+            "response": {{}}
+        }}
     ]
-}
+}}

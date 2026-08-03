@@ -11,14 +11,27 @@ Clarification Answers:
 Return ONLY valid JSON in this format:
 
 {{
-  "executive_summary": "",
-  "problem_statement": "",
-  "product_goals": [],
-  "target_users": [],
-  "functional_requirements": [],
-  "non_functional_requirements": [],
-  "user_flow": [],
-  "success_metrics": [],
-  "constraints": [],
-  "future_scope": []
+    "product_name": "",
+    "problem_statement": "",
+    "target_audience": [],
+    "goals": [],
+    "features": [
+        {{
+            "name": "",
+            "description": "",
+            "priority": ""
+        }}
+    ],
+    "user_personas": [
+        {{
+            "name": "",
+            "description": ""
+        }}
+    ],
+    "user_journey": [],
+    "functional_requirements": [],
+    "non_functional_requirements": [],
+    "success_metrics": [],
+    "constraints": [],
+    "future_scope": []
 }}
