@@ -27,6 +27,8 @@ class ReflectionAgent(BaseAgent):
         return json.loads(response)
 
     def execute(self, state: BlueprintState):
+        if "reflection" not in state["requested_modules"]:
+            return state
 
         result = self.run(
             planning=state["planning_output"],

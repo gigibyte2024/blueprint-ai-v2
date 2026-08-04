@@ -13,16 +13,13 @@ from app.agents.database_agent import DatabaseAgent
 from app.agents.roadmap_agent import RoadmapAgent
 from app.agents.reflection_agent import ReflectionAgent
 from app.agents.research_agent import ResearchAgent
+from app.agents.memory_agent import MemoryAgent
 
 builder = StateGraph(BlueprintState)
+
 planning = PlanningAgent()
 orchestrator = OrchestratorAgent()
 clarification = ClarificationAgent()
-
-builder.add_node("orchestrator", orchestrator.execute)
-builder.add_node("clarification", clarification.execute)
-
-builder.set_entry_point("orchestrator")
 technical = TechnicalAgent()
 ui = UIAgent()
 composer = ComposerAgent()
@@ -32,95 +29,125 @@ database = DatabaseAgent()
 roadmap = RoadmapAgent()
 reflection = ReflectionAgent()
 research = ResearchAgent()
+memory = MemoryAgent()
+
+builder.set_entry_point("orchestrator")
+
+builder.add_node("orchestrator", orchestrator.execute)
+builder.add_node("clarification", clarification.execute)
+builder.add_node("research", research.execute)
+builder.add_node("memory", memory.execute)
+builder.add_node("planning", planning.execute)
+builder.add_node("prd", prd.execute)
+builder.add_node("technical", technical.execute)
+builder.add_node("api", api.execute)
+builder.add_node("database", database.execute)
+builder.add_node("roadmap", roadmap.execute)
+builder.add_node("ui", ui.execute)
+builder.add_node("reflection", reflection.execute)
+builder.add_node("composer", composer.execute)
+
 
 def route(state: BlueprintState):
-
     return state["current_step"]
 
+def should_run(module):
+
+    def router(state: BlueprintState):
+
+        if module in state["requested_modules"]:
+            return "run"
+
+        return "skip"
+
+    return router
 
 builder.add_conditional_edges(
     "orchestrator",
     route,
     {
         "clarification": "clarification",
-        "planning": "research",
+        "research": "research",
     },
 )
 
+builder.add_edge("clarification", END)
 
-builder.add_edge(
-    "clarification",
-    END,
+builder.add_edge("research", "memory")
+
+builder.add_conditional_edges(
+    "memory",
+    should_run("planning"),
+    {
+        "run": "planning",
+        "skip": "composer",
+    },
 )
 
-builder.add_node(
+builder.add_conditional_edges(
     "planning",
-    planning.execute,
+    should_run("prd"),
+    {
+        "run": "prd",
+        "skip": "technical",
+    },
 )
 
-builder.add_node(
+builder.add_conditional_edges(
     "prd",
-    prd.execute,
-)
-builder.add_node(
-    "api",
-    api.execute,
-)
-builder.add_node(
-    "database",
-    database.execute,
+    should_run("technical"),
+    {
+        "run": "technical",
+        "skip": "api",
+    },
 )
 
-builder.add_node(
-    "roadmap",
-    roadmap.execute,
-)
-
-builder.add_edge("research", "planning")
-builder.add_edge("planning", "prd")
-builder.add_edge("prd", "technical")
-
-builder.add_edge("technical", "api")
-builder.add_edge("api", "database")
-builder.add_edge("database", "roadmap")
-builder.add_edge("roadmap", "ui")
-builder.add_edge(
-    "ui",
-    "reflection",
-)
-
-builder.add_edge(
-    "reflection",
-    "composer",
-)
-
-builder.add_edge(
-    "composer",
-    END,
-)
-builder.add_node(
+builder.add_conditional_edges(
     "technical",
-    technical.execute
+    should_run("api"),
+    {
+        "run": "api",
+        "skip": "database",
+    },
 )
 
-builder.add_node(
+builder.add_conditional_edges(
+    "api",
+    should_run("database"),
+    {
+        "run": "database",
+        "skip": "roadmap",
+    },
+)
+
+builder.add_conditional_edges(
+    "database",
+    should_run("roadmap"),
+    {
+        "run": "roadmap",
+        "skip": "ui",
+    },
+)
+
+builder.add_conditional_edges(
+    "roadmap",
+    should_run("ui"),
+    {
+        "run": "ui",
+        "skip": "reflection",
+    },
+)
+
+builder.add_conditional_edges(
     "ui",
-    ui.execute,
+    should_run("reflection"),
+    {
+        "run": "reflection",
+        "skip": "composer",
+    },
 )
 
-builder.add_node(
-    "composer",
-    composer.execute,
-)
-builder.add_node(
-    "reflection",
-    reflection.execute,
-)
-
-builder.add_node(
-    "research",
-    research.execute,
-)
-
+builder.add_edge("reflection", "composer")
+builder.add_edge("composer", END)
 
 workflow = builder.compile()

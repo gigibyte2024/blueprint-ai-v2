@@ -16,7 +16,16 @@ export default function IdeaWorkspacePage() {
 
   const [idea, setIdea] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const [selectedModules, setSelectedModules] = useState([
+    "planning",
+    "prd",
+    "technical",
+    "api",
+    "database",
+    "roadmap",
+    "ui",
+    "reflection",
+  ]);
   async function handleGenerate() {
     if (!idea.trim()) {
       toast.error("Please enter your startup idea.");
@@ -26,7 +35,10 @@ export default function IdeaWorkspacePage() {
     try {
       setLoading(true);
 
-      const response = await generateBlueprint(idea);
+      const response = await generateBlueprint(
+        idea,
+        selectedModules
+      );
 
       sessionStorage.setItem("blueprint", JSON.stringify(response.blueprint));
       toast.success("Blueprint generated successfully!");
@@ -84,6 +96,59 @@ export default function IdeaWorkspacePage() {
             />
 
             <div className="mt-8">
+            <h3 className="text-white font-semibold mb-4">
+              Select Modules
+            </h3>
+
+              <div className="grid grid-cols-2 gap-3">
+
+    {[
+      "planning",
+      "prd",
+      "technical",
+      "api",
+      "database",
+      "roadmap",
+      "ui",
+      "reflection",
+    ].map((module) => (
+
+      <label
+        key={module}
+        className="flex items-center gap-2 text-slate-300"
+      >
+        <input
+          type="checkbox"
+          checked={selectedModules.includes(module)}
+          onChange={(e) => {
+
+            if (e.target.checked) {
+              setSelectedModules([
+                ...selectedModules,
+                module,
+              ]);
+            } else {
+              setSelectedModules(
+                selectedModules.filter(
+                  (m) => m !== module
+                )
+              );
+            }
+
+          }}
+        />
+
+        {module}
+
+      </label>
+
+    ))}
+
+  </div>
+</div>
+
+            <div className="mt-8">
+
               <Button onClick={handleGenerate} className="w-full py-4">
                 ✨ Generate Blueprint
               </Button>

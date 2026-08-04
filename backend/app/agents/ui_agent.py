@@ -24,6 +24,8 @@ class UIAgent(BaseAgent):
         return json.loads(response)
 
     def execute(self, state: BlueprintState):
+        if "ui" not in state["requested_modules"]:
+            return state
 
         planning = state["planning_output"]
 

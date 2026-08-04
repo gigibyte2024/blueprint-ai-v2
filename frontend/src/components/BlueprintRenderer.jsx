@@ -12,7 +12,7 @@ export default function BlueprintRenderer({ tab, data }) {
 
         <Section title="✨ Core Features">
           <ul className="space-y-3">
-            {data.features.map((feature, index) => (
+            {(data.features || []).map((feature, index) => (
               <li key={index} className="bg-slate-700 rounded-lg p-3">
                 ✅ {feature}
               </li>
@@ -22,7 +22,7 @@ export default function BlueprintRenderer({ tab, data }) {
 
         <Section title="👤 User Stories">
           <ul className="space-y-3">
-            {data.user_stories.map((story, index) => (
+            {(data.user_stories || []).map((story, index) => (
               <li key={index} className="bg-slate-700 rounded-lg p-3">
                 {story}
               </li>
@@ -32,7 +32,7 @@ export default function BlueprintRenderer({ tab, data }) {
 
         <Section title="⚙ Functional Requirements">
           <ul className="space-y-3">
-            {data.functional_requirements.map((item, index) => (
+            {(data.functional_requirements || []).map((item, index) => (
               <li key={index} className="bg-slate-700 rounded-lg p-3">
                 {item}
               </li>
@@ -42,7 +42,7 @@ export default function BlueprintRenderer({ tab, data }) {
 
         <Section title="🛡 Non Functional Requirements">
           <ul className="space-y-3">
-            {data.non_functional_requirements.map((item, index) => (
+            {(data.non_functional_requirements || []).map((item, index) => (
               <li key={index} className="bg-slate-700 rounded-lg p-3">
                 {item}
               </li>
@@ -65,7 +65,7 @@ export default function BlueprintRenderer({ tab, data }) {
 
         <Section title="🎯 Product Goals">
           <ul className="space-y-3">
-            {data.product_goals.map((goal, index) => (
+            {(data.product_goals || []).map((goal, index) => (
               <li key={index} className="bg-slate-700 rounded-lg p-3">
                 🎯 {goal}
               </li>
@@ -75,7 +75,7 @@ export default function BlueprintRenderer({ tab, data }) {
 
         <Section title="👥 Target Users">
           <ul className="space-y-3">
-            {data.target_users.map((user, index) => (
+            {(data.target_users || []).map((user, index) => (
               <li key={index} className="bg-slate-700 rounded-lg p-3">
                 👤 {user}
               </li>
@@ -85,7 +85,7 @@ export default function BlueprintRenderer({ tab, data }) {
 
         <Section title="⚙ Functional Requirements">
           <ul className="space-y-3">
-            {data.functional_requirements.map((item, index) => (
+            {(data.functional_requirements || []).map((item, index) => (
               <li key={index} className="bg-slate-700 rounded-lg p-3">
                 ✅ {item}
               </li>
@@ -95,7 +95,7 @@ export default function BlueprintRenderer({ tab, data }) {
 
         <Section title="🛡 Non-Functional Requirements">
           <ul className="space-y-3">
-            {data.non_functional_requirements.map((item, index) => (
+            {(data.non_functional_requirements || []).map((item, index) => (
               <li key={index} className="bg-slate-700 rounded-lg p-3">
                 🔒 {item}
               </li>
@@ -105,7 +105,7 @@ export default function BlueprintRenderer({ tab, data }) {
 
         <Section title="🔄 User Flow">
           <ol className="space-y-3 list-decimal list-inside">
-            {data.user_flow.map((step, index) => (
+            {(data.user_flow || []).map((step, index) => (
               <li key={index} className="bg-slate-700 rounded-lg p-3">
                 {step}
               </li>
@@ -115,7 +115,7 @@ export default function BlueprintRenderer({ tab, data }) {
 
         <Section title="📊 Success Metrics">
           <ul className="space-y-3">
-            {data.success_metrics.map((metric, index) => (
+            {(data.success_metrics || []).map((metric, index) => (
               <li key={index} className="bg-slate-700 rounded-lg p-3">
                 📈 {metric}
               </li>
@@ -125,7 +125,7 @@ export default function BlueprintRenderer({ tab, data }) {
 
         <Section title="⚠ Constraints">
           <ul className="space-y-3">
-            {data.constraints.map((constraint, index) => (
+            {(data.constraints || []).map((constraint, index) => (
               <li key={index} className="bg-slate-700 rounded-lg p-3">
                 ⚠ {constraint}
               </li>
@@ -135,7 +135,7 @@ export default function BlueprintRenderer({ tab, data }) {
 
         <Section title="🚀 Future Scope">
           <ul className="space-y-3">
-            {data.future_scope.map((item, index) => (
+            {(data.future_scope || []).map((item, index) => (
               <li key={index} className="bg-slate-700 rounded-lg p-3">
                 🚀 {item}
               </li>
@@ -150,7 +150,7 @@ export default function BlueprintRenderer({ tab, data }) {
       <div className="space-y-8">
         <Section title="🛠 Tech Stack">
           <div className="grid md:grid-cols-2 gap-4">
-            {Object.entries(data.tech_stack).map(([key, value]) => (
+            {Object.entries(data.tech_stack || {}).map(([key, value]) => (
               <div key={key} className="bg-slate-700 rounded-xl p-4">
                 <h4 className="text-violet-300 font-semibold capitalize mb-2">
                   {key}
@@ -164,7 +164,7 @@ export default function BlueprintRenderer({ tab, data }) {
 
         <Section title="🗄 Database Tables">
           <div className="space-y-5">
-            {Object.entries(data.database_tables).map(([table, columns]) => (
+            {Object.entries(data.database_tables || {}).map(([table, columns]) => (
               <div key={table} className="bg-slate-700 rounded-xl p-4">
                 <h4 className="text-lg font-semibold text-violet-300 capitalize mb-3">
                   {table}
@@ -187,7 +187,7 @@ export default function BlueprintRenderer({ tab, data }) {
 
         <Section title="🔌 API Endpoints">
           <div className="space-y-3">
-            {data.api_endpoints.map((endpoint, index) => (
+            {(data.api_endpoints || []).map((endpoint, index) => (
               <div
                 key={index}
                 className="bg-slate-700 rounded-lg p-3 font-mono text-sm"
@@ -288,7 +288,7 @@ export default function BlueprintRenderer({ tab, data }) {
 
         <Section title="📦 Entities">
           <div className="space-y-6">
-            {data.entities.map((entity, index) => (
+            {(data.entities || []).map((entity, index) => (
               <div key={index} className="bg-slate-700 rounded-xl p-5">
                 <h3 className="text-xl font-bold text-violet-300">
                   {entity.name}
@@ -309,7 +309,7 @@ export default function BlueprintRenderer({ tab, data }) {
                     </thead>
 
                     <tbody>
-                      {entity.fields.map((field, idx) => (
+                      {(entity.fields || []).map((field, idx) => (
                         <tr key={idx} className="border-b border-slate-800">
                           <td className="py-2">{field.name}</td>
                           <td className="py-2">{field.type}</td>
@@ -332,7 +332,7 @@ export default function BlueprintRenderer({ tab, data }) {
 
         <Section title="🔗 Relationships">
           <div className="space-y-3">
-            {data.relationships.map((relation, index) => (
+            {(data.relationships || []).map((relation, index) => (
               <div key={index} className="bg-slate-700 rounded-lg p-4">
                 <p>
                   <strong>{relation.entity1}</strong> ──
@@ -350,7 +350,7 @@ export default function BlueprintRenderer({ tab, data }) {
 
         <Section title="⚡ Indexes">
           <div className="space-y-3">
-            {data.indexes.map((index, idx) => (
+            {(data.indexes || []).map((index, idx) => (
               <div key={idx} className="bg-slate-700 rounded-lg p-3">
                 📌 {index.entity} → {index.field}
               </div>
@@ -360,7 +360,7 @@ export default function BlueprintRenderer({ tab, data }) {
 
         <Section title="📝 Notes">
           <ul className="space-y-3">
-            {data.notes.map((note, index) => (
+            {(data.notes || []).map((note, index) => (
               <li key={index} className="bg-slate-700 rounded-lg p-3">
                 💡 {note}
               </li>
@@ -383,7 +383,7 @@ export default function BlueprintRenderer({ tab, data }) {
 
         <Section title="🚀 Development Phases">
           <div className="space-y-6">
-            {data.phases.map((phase, index) => (
+            {(data.phases || []).map((phase, index) => (
               <div key={index} className="bg-slate-700 rounded-xl p-5">
                 <div className="flex justify-between items-center mb-4">
                   <h3 className="text-xl font-bold text-violet-300">
@@ -398,7 +398,7 @@ export default function BlueprintRenderer({ tab, data }) {
                 <h4 className="font-semibold mb-2">🎯 Goals</h4>
 
                 <ul className="space-y-2 mb-5">
-                  {phase.goals.map((goal, idx) => (
+                  {(phase.goals || []).map((goal, idx) => (
                     <li key={idx} className="bg-slate-800 rounded-lg p-3">
                       ✅ {goal}
                     </li>
@@ -408,7 +408,7 @@ export default function BlueprintRenderer({ tab, data }) {
                 <h4 className="font-semibold mb-2">📦 Deliverables</h4>
 
                 <ul className="space-y-2">
-                  {phase.deliverables.map((item, idx) => (
+                  {(phase.deliverables || []).map((item, idx) => (
                     <li key={idx} className="bg-slate-800 rounded-lg p-3">
                       📄 {item}
                     </li>
@@ -421,7 +421,7 @@ export default function BlueprintRenderer({ tab, data }) {
 
         <Section title="🏁 Milestones">
           <div className="space-y-3">
-            {data.milestones.map((milestone, index) => (
+            {(data.milestones || []).map((milestone, index) => (
               <div key={index} className="bg-slate-700 rounded-lg p-3">
                 🎯 {milestone}
               </div>
@@ -431,7 +431,7 @@ export default function BlueprintRenderer({ tab, data }) {
 
         <Section title="⚠ Risks">
           <div className="space-y-3">
-            {data.risks.map((risk, index) => (
+            {(data.risks || []).map((risk, index) => (
               <div key={index} className="bg-slate-700 rounded-lg p-3">
                 ⚠ {risk}
               </div>
@@ -441,7 +441,7 @@ export default function BlueprintRenderer({ tab, data }) {
 
         <Section title="💡 Recommendations">
           <div className="space-y-3">
-            {data.recommendations.map((recommendation, index) => (
+            {(data.recommendations || []).map((recommendation, index) => (
               <div key={index} className="bg-slate-700 rounded-lg p-3">
                 💡 {recommendation}
               </div>
@@ -482,7 +482,7 @@ export default function BlueprintRenderer({ tab, data }) {
 
         <Section title="✨ Design System">
           <div className="flex flex-wrap gap-3">
-            {data.design_system.map((item, index) => (
+          {(data.design_system || []).map((item, index) => (
               <span
                 key={index}
                 className="bg-violet-600 px-4 py-2 rounded-full text-sm"
@@ -495,7 +495,7 @@ export default function BlueprintRenderer({ tab, data }) {
 
         <Section title="🎨 Color Scheme">
           <div className="grid md:grid-cols-2 gap-4">
-            {Object.entries(data.color_scheme).map(([key, value]) => (
+          {Object.entries(data.color_scheme || {}).map(([key, value]) => (
               <div
                 key={key}
                 className="bg-slate-700 rounded-xl p-4 flex items-center justify-between"
@@ -521,7 +521,7 @@ export default function BlueprintRenderer({ tab, data }) {
               <strong>Font:</strong> {data.typography.font_family}
             </p>
 
-            {Object.entries(data.typography.font_sizes).map(([key, value]) => (
+            {Object.entries(data.typography?.font_sizes || {}).map(([key, value]) => (
               <p key={key}>
                 <strong className="capitalize">{key}:</strong> {value}
               </p>
@@ -537,7 +537,7 @@ export default function BlueprintRenderer({ tab, data }) {
 
         <Section title="🎞 Animations">
           <div className="space-y-3">
-            {Object.entries(data.animations).map(([key, value]) => (
+          {Object.entries(data.animations || {}).map(([key, value]) => (
               <div
                 key={key}
                 className="bg-slate-700 rounded-lg p-3 flex justify-between"

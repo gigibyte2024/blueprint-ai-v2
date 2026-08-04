@@ -3,7 +3,7 @@ from app.graph.state import BlueprintState
 
 class OrchestratorAgent:
 
-    def execute(self, state):
+    def execute(self, state: BlueprintState):
 
         if (
             not state["is_clarification_complete"]
@@ -11,6 +11,6 @@ class OrchestratorAgent:
         ):
             state["current_step"] = "clarification"
         else:
-            state["current_step"] = "planning"
+            state["current_step"] = "research"
 
         return state

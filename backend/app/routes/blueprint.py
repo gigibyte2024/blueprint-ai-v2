@@ -19,9 +19,18 @@ def generate_blueprint(data: dict):
 
     # Selected Modules
         "requested_modules": data.get(
-        "requested_modules",
-            ["planning", "technical", "ui"]
-        ),
+    "requested_modules",
+    [
+        "planning",
+        "prd",
+        "technical",
+        "api",
+        "database",
+        "roadmap",
+        "ui",
+        "reflection"
+    ]
+),
 
     # Shared Project Context
         "project_context": {},

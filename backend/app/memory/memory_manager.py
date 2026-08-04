@@ -1,21 +1,30 @@
-from app.memory.memory_store import load_memory, save_memory
+from app.memory.memory_store import MemoryStore
 
 
 class MemoryManager:
 
-    def save_blueprint(self, idea, blueprint):
+    @staticmethod
+    def save_blueprint(idea, blueprint):
 
-        memory = load_memory()
+        memory = MemoryStore.load()
 
-        memory.append(
-            {
-                "idea": idea,
-                "blueprint": blueprint
-            }
-        )
+        memory.append({
+            "idea": idea,
+            "summary": blueprint["planning"]["product_summary"]
+        })
 
-        save_memory(memory)
+        MemoryStore.save(memory)
 
-    def get_previous_projects(self):
+    @staticmethod
+    def get_projects():
+        return MemoryStore.load()
 
-        return load_memory()
+    @staticmethod
+    def get_last_project():
+
+        memory = MemoryStore.load()
+
+        if not memory:
+            return None
+
+        return memory[-1]

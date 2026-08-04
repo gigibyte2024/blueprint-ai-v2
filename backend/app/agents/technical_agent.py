@@ -32,6 +32,8 @@ class TechnicalAgent(BaseAgent):
             raise
 
     def execute(self, state: BlueprintState):
+        if "technical" not in state["requested_modules"]:
+            return state
 
         planning = state["planning_output"]
 

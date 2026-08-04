@@ -25,6 +25,8 @@ class APIAgent(BaseAgent):
         return json.loads(response)
 
     def execute(self, state: BlueprintState):
+        if "api" not in state["requested_modules"]:
+            return state
 
         result = self.run(
             idea=state["idea"],

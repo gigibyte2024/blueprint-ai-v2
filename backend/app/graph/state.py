@@ -17,7 +17,6 @@ class BlueprintState(TypedDict):
     # Clarification
     clarification_questions: List[str]
     clarification_answers: List[str]
-    project_context: Dict[str, Any]
 
     # Modules
 

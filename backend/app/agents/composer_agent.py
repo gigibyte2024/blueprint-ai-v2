@@ -9,16 +9,21 @@ class ComposerAgent:
 
     def execute(self, state: BlueprintState):
 
+        modules = {
+    "planning": state.get("planning_output", {}),
+    "prd": state.get("prd_output", {}),
+    "technical": state.get("technical_output", {}),
+    "api": state.get("api_output", {}),
+    "database": state.get("database_output", {}),
+    "roadmap": state.get("roadmap_output", {}),
+    "ui": state.get("ui_output", {}),
+    "reflection": state.get("reflection_output", {}),
+}
+
         state["final_blueprint"] = {
-
-            "planning": state["planning_output"],
-            "prd": state["prd_output"],
-            "technical": state["technical_output"],
-            "api": state["api_output"],
-            "database": state["database_output"],
-            "roadmap": state["roadmap_output"],
-            "ui": state["ui_output"]
-
+            key: value
+            for key, value in modules.items()
+            if key in state["requested_modules"]
         }
 
         self.memory.save_blueprint(
