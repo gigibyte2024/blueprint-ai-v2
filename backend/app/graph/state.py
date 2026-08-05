@@ -44,6 +44,7 @@ class BlueprintState(TypedDict):
 
     documentation_output: Dict[str,Any]
     reflection_output: Dict[str, Any]
+    reflection_done: bool
 
     critic_output: Dict[str, Any]
 

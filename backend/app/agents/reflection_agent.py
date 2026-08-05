@@ -27,19 +27,28 @@ class ReflectionAgent(BaseAgent):
         return json.loads(response)
 
     def execute(self, state: BlueprintState):
-        if "reflection" not in state["requested_modules"]:
+
+        # Prevent infinite reflection loops
+        if state.get("reflection_done", False):
+            return state
+
+        critic = state.get("critic_output", {})
+
+        if critic.get("score", 10) >= 8:
             return state
 
         result = self.run(
-            planning=state["planning_output"],
-            prd=state["prd_output"],
-            technical=state["technical_output"],
-            api=state["api_output"],
-            database=state["database_output"],
-            roadmap=state["roadmap_output"],
-            ui=state["ui_output"],
+            planning=state.get("planning_output", {}),
+            prd=state.get("prd_output", {}),
+            technical=state.get("technical_output", {}),
+            api=state.get("api_output", {}),
+            database=state.get("database_output", {}),
+            roadmap=state.get("roadmap_output", {}),
+            ui=state.get("ui_output", {}),
+            critic=json.dumps(critic, indent=2),
         )
 
         state["reflection_output"] = result
+        state["reflection_done"] = True
 
         return state

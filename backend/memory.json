@@ -26,5 +26,13 @@
     {
         "idea": "ai powered gym trainer",
         "summary": "The AI Powered Gym Trainer is a web application designed for a general audience, utilizing AI-powered technology to assist users in tracking and managing their gym workouts. The application will be built using a microservices architecture and a tech stack that includes React, Tailwind CSS, shadcn/ui, Framer Motion, Node.js, Express.js, Docker, and will integrate with Stripe or PayPal for payment processing and Google Fit or Apple Health for fitness data integration."
+    },
+    {
+        "idea": "ai powered gym tracker",
+        "summary": "The AI Powered Gym Tracker is a web application designed for a general audience, utilizing AI-powered technology to assist users in tracking and managing their gym workouts. The application will be built using a microservices architecture and a tech stack that includes React, Tailwind CSS, shadcn/ui, Framer Motion, Node.js, Express.js, Docker, and will integrate with Stripe for payment processing and Google Fit or Apple Health for fitness data integration."
+    },
+    {
+        "idea": "ai powered gym tracker",
+        "summary": "The AI Powered Gym Tracker is a web application designed for a general audience, utilizing AI-powered technology to assist users in tracking and managing their gym workouts. The application will be built using a microservices architecture and a tech stack that includes React, Tailwind CSS, shadcn/ui, Framer Motion, Node.js, Express.js, Docker, and will integrate with Stripe for payment processing and Google Fit or Apple Health for fitness data integration."
     }
 ]

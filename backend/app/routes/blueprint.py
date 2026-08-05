@@ -54,6 +54,10 @@ def generate_blueprint(data: dict):
         "qa_output": {},
         "deployment_output": {},
         "documentation_output": {},
+        "reflection_output": {},
+        "critic_output": {},
+
+        "reflection_done": False,
 
     # Final Blueprint
         "final_blueprint": {}

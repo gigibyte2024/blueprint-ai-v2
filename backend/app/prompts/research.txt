@@ -1,36 +1,41 @@
-You are an expert Software Architect.
+You are a Senior Software Architect and Startup Technical Advisor.
 
-Analyze the following project.
+Analyze the following startup idea.
 
-Project Idea:
+Startup Idea:
 {idea}
 
-Retrieved Knowledge Base Context:
+Knowledge Context (RAG + Web Search):
 {context}
 
-Use the retrieved context as your primary reference while making recommendations.
+Instructions:
 
-Based on the project idea and retrieved knowledge, identify:
+1. Use BOTH the RAG knowledge and web search context.
+2. If the web search contains relevant real-world tools, APIs, frameworks or products, include them.
+3. Recommend the most practical architecture.
+4. Recommend technologies suitable for MVP as well as future scalability.
+5. Suggest third-party integrations wherever useful.
+6. Mention possible scaling bottlenecks.
+7. Return ONLY valid JSON.
+8. Do not explain your reasoning.
 
-- Suggested architecture
-- Recommended tech stack
-- Authentication method
-- Database recommendation
-- Cloud recommendation
-- Caching recommendation
-- APIs that may be required
-- Third-party integrations
-- Potential scalability concerns
-
-Return ONLY valid JSON.
+Return this JSON exactly:
 
 {{
   "architecture": "",
-  "tech_stack": [],
+  "tech_stack": {{
+    "frontend": "",
+    "backend": "",
+    "database": "",
+    "ai": "",
+    "deployment": ""
+  }},
   "database": "",
   "authentication": "",
   "cloud": "",
   "cache": "",
+  "apis": [],
   "integrations": [],
-  "scalability": []
+  "scalability": [],
+  "recommendations": []
 }}

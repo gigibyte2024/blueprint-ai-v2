@@ -14,6 +14,7 @@ from app.agents.roadmap_agent import RoadmapAgent
 from app.agents.reflection_agent import ReflectionAgent
 from app.agents.research_agent import ResearchAgent
 from app.agents.memory_agent import MemoryAgent
+from app.agents.critic_agent import CriticAgent
 
 builder = StateGraph(BlueprintState)
 
@@ -28,6 +29,7 @@ api = APIAgent()
 database = DatabaseAgent()
 roadmap = RoadmapAgent()
 reflection = ReflectionAgent()
+critic = CriticAgent()
 research = ResearchAgent()
 memory = MemoryAgent()
 
@@ -45,6 +47,7 @@ builder.add_node("database", database.execute)
 builder.add_node("roadmap", roadmap.execute)
 builder.add_node("ui", ui.execute)
 builder.add_node("reflection", reflection.execute)
+builder.add_node("critic",critic.execute)
 builder.add_node("composer", composer.execute)
 
 
@@ -61,6 +64,19 @@ def should_run(module):
         return "skip"
 
     return router
+
+def critic_route(state: BlueprintState):
+
+    score = state["critic_output"].get("score", 10)
+
+    if state.get("reflection_done", False):
+        return "finish"
+
+    if score >= 8:
+        return "finish"
+
+    return "reflect"
+
 
 builder.add_conditional_edges(
     "orchestrator",
@@ -148,6 +164,15 @@ builder.add_conditional_edges(
 )
 
 builder.add_edge("reflection", "composer")
-builder.add_edge("composer", END)
+builder.add_edge("composer", "critic")
+
+builder.add_conditional_edges(
+    "critic",
+    critic_route,
+    {
+        "reflect": "reflection",
+        "finish": END,
+    },
+)
 
 workflow = builder.compile()

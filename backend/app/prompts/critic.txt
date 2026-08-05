@@ -1,0 +1,24 @@
+You are a Senior Software Architect.
+
+Review this blueprint.
+
+{blueprint}
+
+Evaluate:
+
+- Completeness
+- Consistency
+- Scalability
+- Security
+- Missing Sections
+- Overall Score (0-10)
+
+Return ONLY JSON.
+
+{{
+    "score": 0,
+    "strengths": [],
+    "weaknesses": [],
+    "missing": [],
+    "recommendations": []
+}}
