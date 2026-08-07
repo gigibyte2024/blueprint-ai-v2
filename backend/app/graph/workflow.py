@@ -15,11 +15,13 @@ from app.agents.reflection_agent import ReflectionAgent
 from app.agents.research_agent import ResearchAgent
 from app.agents.memory_agent import MemoryAgent
 from app.agents.critic_agent import CriticAgent
+from app.agents.planner_agent import PlannerAgent
 
 builder = StateGraph(BlueprintState)
 
 planning = PlanningAgent()
 orchestrator = OrchestratorAgent()
+planner = PlannerAgent()
 clarification = ClarificationAgent()
 technical = TechnicalAgent()
 ui = UIAgent()
@@ -36,6 +38,7 @@ memory = MemoryAgent()
 builder.set_entry_point("orchestrator")
 
 builder.add_node("orchestrator", orchestrator.execute)
+builder.add_node("planner",planner.execute)
 builder.add_node("clarification", clarification.execute)
 builder.add_node("research", research.execute)
 builder.add_node("memory", memory.execute)
@@ -89,7 +92,8 @@ builder.add_conditional_edges(
 
 builder.add_edge("clarification", END)
 
-builder.add_edge("research", "memory")
+builder.add_edge("research", "planner")
+builder.add_edge("planner", "memory")
 
 builder.add_conditional_edges(
     "memory",
@@ -100,59 +104,12 @@ builder.add_conditional_edges(
     },
 )
 
-builder.add_conditional_edges(
-    "planning",
-    should_run("prd"),
-    {
-        "run": "prd",
-        "skip": "technical",
-    },
-)
-
-builder.add_conditional_edges(
-    "prd",
-    should_run("technical"),
-    {
-        "run": "technical",
-        "skip": "api",
-    },
-)
-
-builder.add_conditional_edges(
-    "technical",
-    should_run("api"),
-    {
-        "run": "api",
-        "skip": "database",
-    },
-)
-
-builder.add_conditional_edges(
-    "api",
-    should_run("database"),
-    {
-        "run": "database",
-        "skip": "roadmap",
-    },
-)
-
-builder.add_conditional_edges(
-    "database",
-    should_run("roadmap"),
-    {
-        "run": "roadmap",
-        "skip": "ui",
-    },
-)
-
-builder.add_conditional_edges(
-    "roadmap",
-    should_run("ui"),
-    {
-        "run": "ui",
-        "skip": "reflection",
-    },
-)
+builder.add_edge("planning", "prd")
+builder.add_edge("prd", "technical")
+builder.add_edge("technical", "api")
+builder.add_edge("api", "database")
+builder.add_edge("database", "roadmap")
+builder.add_edge("roadmap", "ui")
 
 builder.add_conditional_edges(
     "ui",

@@ -34,6 +34,7 @@ def generate_blueprint(data: dict):
 
     # Shared Project Context
         "project_context": {},
+        "execution_plan": {},
 
     # Clarification
         "clarification_questions": [],

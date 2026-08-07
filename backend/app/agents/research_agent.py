@@ -37,13 +37,23 @@ class ResearchAgent(BaseAgent):
             [doc.page_content for doc in docs]
         )
 
-        tool_decider = tool_registry.get("tool_decider")
+        execution_plan = state.get("execution_plan", {})
 
-        decision = tool_decider.decide(state["idea"])
+        tools = execution_plan.get("tools")
+
+        if not tools:
+
+            tool_decider = tool_registry.get("tool_decider")
+
+            decision = tool_decider.decide(
+                state["idea"]
+            )
+
+            tools = decision["tools"]
 
         context_parts = []
 
-        for tool_name in decision["tools"]:
+        for tool_name in tools:
 
             tool = tool_registry.get(tool_name)
 

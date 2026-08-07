@@ -34,5 +34,13 @@
     {
         "idea": "ai powered gym tracker",
         "summary": "The AI Powered Gym Tracker is a web application designed for a general audience, utilizing AI-powered technology to assist users in tracking and managing their gym workouts. The application will be built using a microservices architecture and a tech stack that includes React, Tailwind CSS, shadcn/ui, Framer Motion, Node.js, Express.js, Docker, and will integrate with Stripe for payment processing and Google Fit or Apple Health for fitness data integration."
+    },
+    {
+        "idea": "AI Resume Builder",
+        "summary": "The AI Resume Builder is a web application designed for a general audience, utilizing AI-powered technology to assist users in creating and optimizing their resumes. The application will be built using a microservices architecture and a tech stack that includes React, Tailwind CSS, shadcn/ui, Framer Motion, Node.js, Express.js, PostgreSQL, and AI models such as LingyiChen-AI/JadeAI or resume-llm/resume-ai. The application will integrate with LinkedIn API for resume parsing and Indeed API for job matching, and will be deployed using containerization with Docker and Kubernetes on AWS or Google Cloud."
+    },
+    {
+        "idea": "ai resume builder",
+        "summary": "The AI Resume Builder is a web application designed for a general audience, utilizing AI-powered technology to assist users in creating and optimizing their resumes. The application will be built using a microservices architecture and a tech stack that includes React, Tailwind CSS, shadcn/ui, Framer Motion, Node.js, Express.js, PostgreSQL, and AI models such as LingyiChen-AI/JadeAI or resume-llm/resume-ai."
     }
 ]
