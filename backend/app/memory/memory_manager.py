@@ -1,30 +1,51 @@
-from app.memory.memory_store import MemoryStore
-
-
 class MemoryManager:
 
-    @staticmethod
-    def save_blueprint(idea, blueprint):
+    def __init__(self):
+        self.memory = []
 
-        memory = MemoryStore.load()
+    def save_blueprint(self, idea, blueprint):
 
-        memory.append({
-            "idea": idea,
-            "summary": blueprint["planning"]["product_summary"]
-        })
+        planning = blueprint.get(
+            "planning",
+            {},
+        )
 
-        MemoryStore.save(memory)
+        summary = planning.get(
+            "product_summary",
+            planning.get(
+                "project_overview",
+                {},
+            ),
+        )
 
-    @staticmethod
-    def get_projects():
-        return MemoryStore.load()
+        if isinstance(summary, dict):
 
-    @staticmethod
-    def get_last_project():
+            summary = summary.get(
+                "idea",
+                "Blueprint generated",
+            )
 
-        memory = MemoryStore.load()
+        self.memory.append(
+            {
+                "idea": idea,
+                "summary": summary,
+                "blueprint": blueprint,
+            }
+        )
 
-        if not memory:
+        print(
+            "🧠 Blueprint saved to memory"
+        )
+
+        return True
+
+    def get_last_project(self):
+
+        if not self.memory:
             return None
 
-        return memory[-1]
+        return self.memory[-1]
+
+    def get_memory(self):
+
+        return self.memory

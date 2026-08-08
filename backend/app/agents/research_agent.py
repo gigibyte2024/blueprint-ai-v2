@@ -17,10 +17,18 @@ class ResearchAgent(BaseAgent):
         response = response.strip()
 
         if response.startswith("```json"):
-            response = response.replace("```json", "", 1)
+            response = response.replace(
+                "```json",
+                "",
+                1,
+            )
 
         if response.startswith("```"):
-            response = response.replace("```", "", 1)
+            response = response.replace(
+                "```",
+                "",
+                1,
+            )
 
         if response.endswith("```"):
             response = response[:-3]
@@ -31,81 +39,162 @@ class ResearchAgent(BaseAgent):
 
     def execute(self, state: BlueprintState):
 
-        docs = self.retriever.invoke(state["idea"])
+        try:
 
-        rag_context = "\n\n".join(
-            [doc.page_content for doc in docs]
-        )
-
-        execution_plan = state.get("execution_plan", {})
-
-        tools = execution_plan.get("tools")
-
-        if not tools:
-
-            tool_decider = tool_registry.get("tool_decider")
-
-            decision = tool_decider.decide(
+            docs = self.retriever.invoke(
                 state["idea"]
             )
 
-            tools = decision["tools"]
+            rag_context = "\n\n".join(
+                [
+                    doc.page_content
+                    for doc in docs
+                ]
+            )
 
-        context_parts = []
+            tool_decider = tool_registry.get(
+                "tool_decider"
+            )
 
-        for tool_name in tools:
+            web_search = tool_registry.get(
+                "web_search"
+            )
 
-            tool = tool_registry.get(tool_name)
+            web_context = ""
 
-            if tool is None:
-                continue
+            # -------------------------
+            # Tool Decision
+            # -------------------------
 
-            print(f"\n🔧 Using Tool: {tool_name}\n")
+            try:
 
-            if tool_name == "web_search":
-
-                results = tool.execute(
-                    query=state["idea"],
-                    max_results=2,
-                )
-
-                context_parts.append(
-                    "WEB SEARCH:\n"
-                    + "\n".join(
-                        item["title"]
-                        for item in results
+                should_search = (
+                    tool_decider.should_search(
+                        state["idea"]
                     )
                 )
 
-            elif tool_name == "github_search":
+            except Exception as error:
 
-                results = tool.execute(
-                    query=state["idea"]
+                print(
+                    f"⚠️ Tool decision failed: {error}"
                 )
 
-                context_parts.append(
-                    "GITHUB:\n"
-                    + "\n".join(
-                        repo["name"]
-                        for repo in results
+                should_search = False
+
+                state["research_status"] = (
+                    "tool_decision_failed"
+                )
+
+            # -------------------------
+            # Web Search
+            # -------------------------
+
+            if should_search:
+
+                try:
+
+                    print(
+                        "\n🔍 Using Web Search...\n"
                     )
+
+                    web_results = (
+                        web_search.execute(
+                            query=state["idea"],
+                            max_results=2,
+                        )
+                    )
+
+                    web_context = "\n".join(
+                        [
+                            item["title"]
+                            for item in web_results
+                        ]
+                    )
+
+                except Exception as error:
+
+                    print(
+                        f"⚠️ Web search failed: {error}"
+                    )
+
+                    state["research_status"] = (
+                        "web_search_failed"
+                    )
+
+            else:
+
+                print(
+                    "\n📚 Skipping Web Search...\n"
                 )
 
-        tool_context = "\n\n".join(context_parts)
+            # -------------------------
+            # Research LLM
+            # -------------------------
 
-        result = self.run(
-            idea=state["idea"],
-            context=f"""
+            try:
+
+                result = self.run(
+                    idea=state["idea"],
+                    context=f"""
 RAG Knowledge:
 
 {rag_context}
 
-Tool Results:
+Web Search:
 
-{tool_context}
+{web_context}
 """,
-        )
+                )
 
-        state["project_context"] = result
+                state["project_context"] = result
 
-        return state
+                state["research_status"] = (
+                    "completed"
+                )
+
+                return state
+
+            except Exception as error:
+
+                print(
+                    f"⚠️ Research generation "
+                    f"failed: {error}"
+                )
+
+                state["project_context"] = {
+                    "status": "degraded",
+                    "reason": (
+                        "Research generation "
+                        "was unavailable."
+                    ),
+                    "rag_context": rag_context,
+                    "web_context": web_context,
+                    "error": str(error),
+                }
+
+                state["research_status"] = (
+                    "degraded"
+                )
+
+                return state
+
+        except Exception as error:
+
+            print(
+                f"❌ Research Agent failed "
+                f"gracefully: {error}"
+            )
+
+            state["project_context"] = {
+                "status": "failed",
+                "reason": (
+                    "Research agent unavailable. "
+                    "Workflow continued."
+                ),
+                "error": str(error),
+            }
+
+            state["research_status"] = "failed"
+
+            return state

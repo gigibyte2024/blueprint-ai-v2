@@ -1,13 +1,44 @@
+import time
+
+
 class RetryManager:
 
-    def execute(self, fn, retries=2):
+    def __init__(
+        self,
+        max_retries=3,
+        base_delay=1,
+    ):
+        self.max_retries = max_retries
+        self.base_delay = base_delay
 
-        for _ in range(retries):
+    def execute(self, function):
+
+        last_error = None
+
+        for attempt in range(
+            self.max_retries + 1
+        ):
 
             try:
-                return fn()
+                return function()
 
-            except Exception:
-                pass
+            except Exception as error:
 
-        return fn()
+                last_error = error
+
+                if attempt >= self.max_retries:
+                    break
+
+                delay = self.base_delay * (
+                    2 ** attempt
+                )
+
+                print(
+                    f"⚠️ Retry {attempt + 1}/"
+                    f"{self.max_retries} "
+                    f"after {delay}s: {error}"
+                )
+
+                time.sleep(delay)
+
+        raise last_error

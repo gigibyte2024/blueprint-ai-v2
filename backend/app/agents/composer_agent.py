@@ -26,9 +26,13 @@ class ComposerAgent:
             if key in state["requested_modules"]
         }
 
-        self.memory.save_blueprint(
-            state["idea"],
-            state["final_blueprint"],
-        )
+        try:
+            self.memory.save_blueprint(
+                state["idea"],
+                state["final_blueprint"],
+            )
+
+        except Exception as error:
+            print(f"⚠️ Memory save failed gracefully: {error}")
 
         return state

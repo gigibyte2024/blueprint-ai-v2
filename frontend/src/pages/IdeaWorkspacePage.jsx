@@ -9,7 +9,7 @@ import TextArea from "../components/TextArea";
 import Feature from "../components/Feature";
 import LoadingScreen from "../components/LoadingScreen";
 
-import { generateBlueprint } from "../services/blueprintService";
+import { streamBlueprint } from "../services/blueprintService";
 
 export default function IdeaWorkspacePage() {
   const navigate = useNavigate();
@@ -31,19 +31,45 @@ export default function IdeaWorkspacePage() {
       toast.error("Please enter your startup idea.");
       return;
     }
-
+  
     try {
       setLoading(true);
-
-      const response = await generateBlueprint(
+  
+      const requestedModules = [
+        "planning",
+        "prd",
+        "technical",
+        "api",
+        "database",
+        "roadmap",
+        "ui",
+        "reflection",
+      ];
+  
+      await streamBlueprint(
         idea,
-        selectedModules
+        requestedModules,
+  
+        (progress) => {
+          console.log("Blueprint progress:", progress);
+        },
+  
+        (result) => {
+          sessionStorage.setItem(
+            "blueprint",
+            JSON.stringify(result.blueprint)
+          );
+  
+          sessionStorage.setItem(
+            "startupIdea",
+            idea
+          );
+  
+          toast.success("Blueprint generated successfully!");
+  
+          navigate("/dashboard");
+        }
       );
-
-      sessionStorage.setItem("blueprint", JSON.stringify(response.blueprint));
-      toast.success("Blueprint generated successfully!");
-
-      navigate("/dashboard");
     } catch (err) {
       console.error(err);
       toast.error("Failed to generate blueprint.");

@@ -42,5 +42,29 @@
     {
         "idea": "ai resume builder",
         "summary": "The AI Resume Builder is a web application designed for a general audience, utilizing AI-powered technology to assist users in creating and optimizing their resumes. The application will be built using a microservices architecture and a tech stack that includes React, Tailwind CSS, shadcn/ui, Framer Motion, Node.js, Express.js, PostgreSQL, and AI models such as LingyiChen-AI/JadeAI or resume-llm/resume-ai."
+    },
+    {
+        "idea": "ai powered gym tracker",
+        "summary": "The AI Powered Gym Tracker is a web application designed for a general audience, utilizing AI-powered technology to assist users in tracking their workouts and providing personalized fitness recommendations. The application will be built using a microservices architecture and a tech stack that includes React, Tailwind CSS, shadcn/ui, Framer Motion, Node.js, REST APIs, JWT Bearer Tokens, MongoDB or PostgreSQL, and AI models such as OpenAI or custom AI models with TensorFlow or PyTorch."
+    },
+    {
+        "idea": "AI Powered Gym Tracker",
+        "summary": "The AI Powered Gym Tracker is a web application designed for a general audience, utilizing AI-powered technology to assist users in tracking their workouts and providing personalized fitness recommendations. The application will be built using a microservices architecture and a tech stack that includes React, Tailwind CSS, shadcn/ui, Framer Motion, Node.js, REST APIs, JWT Bearer Tokens, MongoDB or PostgreSQL, and AI models such as TensorFlow or PyTorch."
+    },
+    {
+        "idea": "ai powered gym tracker\n",
+        "summary": "The AI Powered Gym Tracker is a web application designed for a general audience, utilizing AI-powered technology to assist users in tracking their workouts and providing personalized fitness recommendations."
+    },
+    {
+        "idea": "ai powered gym tracker\n",
+        "summary": "The AI Powered Gym Tracker is a web application designed for a general audience, utilizing AI-powered technology to assist users in tracking their workouts and providing personalized fitness recommendations."
+    },
+    {
+        "idea": "ai powered gym tracker\n",
+        "summary": "The AI Powered Gym Tracker is a web application designed for a general audience, utilizing AI-powered technology to assist users in tracking their workouts and providing personalized fitness recommendations."
+    },
+    {
+        "idea": "ai powered gym tracker",
+        "summary": "The AI Powered Gym Tracker is a web application designed for a general audience, utilizing AI-powered technology to assist users in tracking their workouts and providing personalized fitness recommendations."
     }
 ]

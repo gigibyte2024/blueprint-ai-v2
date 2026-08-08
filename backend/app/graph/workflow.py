@@ -16,20 +16,20 @@ from app.agents.research_agent import ResearchAgent
 from app.agents.memory_agent import MemoryAgent
 from app.agents.critic_agent import CriticAgent
 from app.agents.planner_agent import PlannerAgent
+from app.execution.executor import ExecutionEngine
+
+
 
 builder = StateGraph(BlueprintState)
 
 planning = PlanningAgent()
 orchestrator = OrchestratorAgent()
 planner = PlannerAgent()
+execution_engine = ExecutionEngine()
 clarification = ClarificationAgent()
-technical = TechnicalAgent()
-ui = UIAgent()
 composer = ComposerAgent()
-prd = PRDAgent()
-api = APIAgent()
-database = DatabaseAgent()
-roadmap = RoadmapAgent()
+
+
 reflection = ReflectionAgent()
 critic = CriticAgent()
 research = ResearchAgent()
@@ -43,16 +43,12 @@ builder.add_node("clarification", clarification.execute)
 builder.add_node("research", research.execute)
 builder.add_node("memory", memory.execute)
 builder.add_node("planning", planning.execute)
-builder.add_node("prd", prd.execute)
-builder.add_node("technical", technical.execute)
-builder.add_node("api", api.execute)
-builder.add_node("database", database.execute)
-builder.add_node("roadmap", roadmap.execute)
-builder.add_node("ui", ui.execute)
+
+
 builder.add_node("reflection", reflection.execute)
 builder.add_node("critic",critic.execute)
 builder.add_node("composer", composer.execute)
-
+builder.add_node("execution",execution_engine.execute)
 
 def route(state: BlueprintState):
     return state["current_step"]
@@ -70,7 +66,13 @@ def should_run(module):
 
 def critic_route(state: BlueprintState):
 
-    score = state["critic_output"].get("score", 10)
+    score = state.get(
+        "critic_output",
+        {}
+    ).get(
+        "score",
+        10,
+    )
 
     if state.get("reflection_done", False):
         return "finish"
@@ -104,21 +106,8 @@ builder.add_conditional_edges(
     },
 )
 
-builder.add_edge("planning", "prd")
-builder.add_edge("prd", "technical")
-builder.add_edge("technical", "api")
-builder.add_edge("api", "database")
-builder.add_edge("database", "roadmap")
-builder.add_edge("roadmap", "ui")
-
-builder.add_conditional_edges(
-    "ui",
-    should_run("reflection"),
-    {
-        "run": "reflection",
-        "skip": "composer",
-    },
-)
+builder.add_edge("planning", "execution")
+builder.add_edge("execution", "reflection")
 
 builder.add_edge("reflection", "composer")
 builder.add_edge("composer", "critic")

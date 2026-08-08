@@ -22,17 +22,41 @@ class CriticAgent(BaseAgent):
         if response.endswith("```"):
             response = response[:-3]
 
+        response = response.strip()
+
         return json.loads(response)
 
     def execute(self, state: BlueprintState):
 
-        result = self.run(
-            blueprint=json.dumps(
-                state["final_blueprint"],
-                indent=2,
+        try:
+
+            result = self.run(
+                blueprint=json.dumps(
+                    state.get(
+                        "final_blueprint",
+                        {}
+                    )
+                )
             )
-        )
 
-        state["critic_output"] = result
+            state["critic_output"] = result
 
-        return state
+            return state
+
+        except Exception as error:
+
+            print(
+                f"⚠️ Critic failed gracefully: {error}"
+            )
+
+            state["critic_output"] = {
+                "status": "failed",
+                "score": 10,
+                "reason": (
+                    "Critic unavailable. "
+                    "Blueprint generation continued."
+                ),
+                "error": str(error),
+            }
+
+            return state

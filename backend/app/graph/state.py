@@ -46,7 +46,9 @@ class BlueprintState(TypedDict):
     reflection_output: Dict[str, Any]
     reflection_done: bool
     execution_plan: Dict[str, Any]
-
+    execution_logs: List[Dict[str, Any]]
+    execution_progress: List[Dict[str, Any]]
+    
     critic_output: Dict[str, Any]
 
     # Final
